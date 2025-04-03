@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shimla's Birthday Surprise! 🎉</title>
+    <title>Shimla's Birthday Surprise</title>
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 </head>
 <body>
     <!-- Login Screen -->
     <div id="login-screen" class="screen active">
-        <div class="heart-pulse">💖</div>
-        <h1 class="neon-text">Enter the Magic Name</h1>
-        <input type="text" id="nameInput" placeholder="Type the special name...">
-        <button class="glow-button" onclick="checkName()">Open Surprise</button>
+        <div class="heart">💖</div>
+        <h1 class="title">Enter Your Name</h1>
+        <input type="text" id="nameInput" placeholder="Type your name here...">
+        <button class="submit-btn" onclick="checkName()">See Magic</button>
     </div>
 
-    <!-- Main Celebration Screen -->
+    <!-- Celebration Screen -->
     <div id="celebration-screen" class="screen">
-        <canvas id="particles"></canvas>
+        <!-- Background Elements -->
+        <canvas id="particles-canvas"></canvas>
+        <div class="emoji-rain"></div>
         
         <!-- Animated Cake -->
-        <div class="cartoon-cake">
+        <div class="birthday-cake">
             <div class="cake-text">Happy Birthday Shimla!</div>
-            <div class="top-layer">
+            <div class="cake-layer top-layer">
                 <div class="frosting"></div>
                 <div class="candles">
                     <div class="candle"><div class="flame"></div></div>
@@ -31,23 +34,17 @@
                     <div class="candle"><div class="flame"></div></div>
                 </div>
             </div>
-            <div class="middle-layer"></div>
-            <div class="base-layer"></div>
+            <div class="cake-layer middle-layer"></div>
+            <div class="cake-layer base-layer"></div>
             <div class="sprinkles"></div>
         </div>
 
-        <!-- Animations Container -->
-        <div class="fireworks"></div>
-        <div class="emoji-storm"></div>
-        
         <!-- Audio -->
-        <audio id="background-music" loop>
-            <source src="assets/audio/birthday-music.mp3" type="audio/mpeg">
+        <audio id="birthday-audio">
+            <source src="assets/audio/birthday-song.mp3" type="audio/mpeg">
         </audio>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 </html>
