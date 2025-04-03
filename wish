@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Birthday Surprise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            margin: 50px;
+        }
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #message {
+            display: none;
+            margin-top: 20px;
+        }
+        img {
+            width: 300px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Enter Your Names</h2>
+        <input type="text" id="name1" placeholder="Enter your name">
+        <input type="text" id="name2" placeholder="Enter boyfriend's name">
+        <button onclick="checkNames()">Submit</button>
+        <div id="message">
+            <h2>Happy Birthday, Love! 🎉🎂</h2>
+            <img src="https://media.giphy.com/media/3ohs4pFAkb2XzBNckQ/giphy.gif" alt="Happy Birthday">
+        </div>
+    </div>
+
+    <script>
+        function checkNames() {
+            let name1 = document.getElementById('name1').value.trim().toLowerCase();
+            let name2 = document.getElementById('name2').value.trim().toLowerCase();
+            if (name1 === 'shimla' && name2 === 'antu') {
+                document.getElementById('message').style.display = 'block';
+            } else {
+                alert('Oops! Names do not match. Try again!');
+            }
+        }
+    </script>
+</body>
+</html>
