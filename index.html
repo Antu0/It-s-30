@@ -6,6 +6,7 @@
     <title>Shimla's Birthday Surprise</title>
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 </head>
 <body>
@@ -23,25 +24,33 @@
         <canvas id="particles-canvas"></canvas>
         <div class="emoji-rain"></div>
         
-        <!-- Animated Cake -->
-        <div class="birthday-cake">
-            <div class="cake-text">Happy Birthday Shimla!</div>
-            <div class="cake-layer top-layer">
-                <div class="frosting"></div>
-                <div class="candles">
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
+        <!-- Centered Content -->
+        <div class="main-content">
+            <!-- Animated Cake -->
+            <div class="cake-container">
+                <div class="birthday-cake">
+                    <div class="cake-layer top-layer">
+                        <div class="frosting"></div>
+                        <div class="candles">
+                            <div class="candle"><div class="flame"></div></div>
+                            <div class="candle"><div class="flame"></div></div>
+                            <div class="candle"><div class="flame"></div></div>
+                        </div>
+                    </div>
+                    <div class="cake-layer middle-layer"></div>
+                    <div class="cake-layer base-layer"></div>
+                    <div class="sprinkles"></div>
+                </div>
+                <!-- Animated Birthday Text -->
+                <div class="birthday-text animate__animated animate__heartBeat animate__infinite">
+                    Happy Birthday To My Shimla! 🎉
                 </div>
             </div>
-            <div class="cake-layer middle-layer"></div>
-            <div class="cake-layer base-layer"></div>
-            <div class="sprinkles"></div>
         </div>
 
         <!-- Audio -->
-        <audio id="birthday-audio">
-            <source src="assets/audio/birthday-song.mp3" type="audio/mpeg">
+        <audio id="birthday-music">
+            <source src="assets/audio/birthday-music.mp3" type="audio/mpeg">
         </audio>
     </div>
 
