@@ -1,14 +1,12 @@
-// Configuration
 const CORRECT_NAME = 'shimla';
-const EMOJIS = ['💖', '🎉', '🎂', '🎁', '🌸', '💋', '🥳'];
-const FIREWORK_COLORS = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+const EMOJIS = ['🎉', '💖', '🎂', '🎁', '🌸', '💋', '🥳'];
 
-// Initialization
+// Initialize
 let particles = [];
-let audioEnabled = false;
+let audio;
 
 function checkName() {
-    const input = document.getElementById('nameInput').value.toLowerCase();
+    const input = document.getElementById('nameInput').value.trim().toLowerCase();
     
     if(input === CORRECT_NAME) {
         showCelebration();
@@ -20,71 +18,99 @@ function checkName() {
 }
 
 function showCelebration() {
-    document.getElementById('login-screen').classList.remove('active');
-    document.getElementById('celebration-screen').classList.add('active');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('celebration-screen').style.display = 'block';
 }
 
 function startAnimations() {
     createParticles();
-    createFireworks();
-    createEmojiStorm();
-    createSprinkles();
-    createCandleEffects();
+    createEmojiRain();
+    createSparkles();
 }
 
 function createParticles() {
-    const canvas = document.getElementById('particles');
+    const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
-    
-    // Particle class and animation logic from previous example
-    // (Include the Particle class and animation loop here)
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if(this.x > canvas.width) this.x = 0;
+            if(this.x < 0) this.x = canvas.width;
+            if(this.y > canvas.height) this.y = 0;
+            if(this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    for(let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
 }
 
-function createFireworks() {
-    setInterval(() => {
-        const firework = document.createElement('div');
-        firework.className = 'firework';
-        firework.style.backgroundColor = FIREWORK_COLORS[Math.floor(Math.random() * FIREWORK_COLORS.length)];
-        document.querySelector('.fireworks').appendChild(firework);
-        setTimeout(() => firework.remove(), 1000);
-    }, 1500);
-}
-
-function createEmojiStorm() {
+function createEmojiRain() {
+    const container = document.querySelector('.emoji-rain');
     setInterval(() => {
         const emoji = document.createElement('div');
-        emoji.className = 'emoji-float';
+        emoji.className = 'emoji';
         emoji.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-        emoji.style.left = `${Math.random() * 100}%`;
-        document.querySelector('.emoji-storm').appendChild(emoji);
+        emoji.style.left = Math.random() * 100 + '%';
+        emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
+        container.appendChild(emoji);
+        
         setTimeout(() => emoji.remove(), 5000);
     }, 300);
 }
 
-function createSprinkles() {
-    const colors = ['#FF0000', '#00FF00', '#FFFF00', '#FF00FF'];
-    const container = document.querySelector('.sprinkles');
-    
-    for(let i = 0; i < 50; i++) {
-        const sprinkle = document.createElement('div');
-        sprinkle.className = 'sprinkle';
-        sprinkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        container.appendChild(sprinkle);
+function createSparkles() {
+    const cake = document.querySelector('.birthday-cake');
+    for(let i = 0; i < 30; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.cssText = `
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: sparkle ${1 + Math.random() * 2}s infinite;
+        `;
+        cake.appendChild(sparkle);
     }
 }
 
-function createCandleEffects() {
-    document.querySelectorAll('.candle').forEach(candle => {
-        candle.addEventListener('click', () => {
-            candle.style.opacity = '0';
-            createSmokeEffect(candle);
-        });
-    });
-}
-
 function playMusic() {
-    const audio = document.getElementById('background-music');
-    audio.volume = 0.5;
+    audio = new Howl({
+        src: ['assets/audio/birthday-song.mp3'],
+        volume: 0.5,
+        loop: true
+    });
     audio.play();
 }
 
@@ -94,9 +120,28 @@ function shakeScreen() {
     setTimeout(() => loginScreen.style.animation = '', 500);
 }
 
-// Initialize particles canvas size
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-15px); }
+        50% { transform: translateX(15px); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+    }
+    
+    @keyframes sparkle {
+        0% { opacity: 0; transform: scale(0); }
+        50% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0); }
+    }
+`;
+document.head.appendChild(style);
+
+// Handle window resize
 window.addEventListener('resize', () => {
-    const canvas = document.getElementById('particles');
+    const canvas = document.getElementById('particles-canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
