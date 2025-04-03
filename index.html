@@ -3,156 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Surprise 💖</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            font-family: 'Arial', sans-serif;
-        }
-
-        #login-container {
-            text-align: center;
-            z-index: 2;
-        }
-
-        #content-container {
-            display: none;
-            position: relative;
-            text-align: center;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 18px;
-            border: 2px solid #ff6b6b;
-            border-radius: 5px;
-            margin: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .cake {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            margin: 20px auto;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .layer {
-            background: #fff5f5;
-            border-radius: 10px;
-            position: absolute;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .base { width: 200px; height: 60px; bottom: 0; }
-        .middle { width: 160px; height: 50px; bottom: 65px; left: 20px; }
-        .top { width: 120px; height: 40px; bottom: 120px; left: 40px; }
-        .candle { width: 10px; height: 40px; background: #ffd700; bottom: 160px; left: 95px; }
-
-        .emoji {
-            font-size: 30px;
-            position: absolute;
-            animation: rotate 2s linear infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            color: #ff6b6b;
-            animation: fall 3s linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        #message {
-            font-size: 24px;
-            color: #ff6b6b;
-            margin: 20px;
-        }
-    </style>
+    <title>Shimla's Birthday Surprise! 🎉</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="login-container">
-        <h1>✨ Enter the Special Name ✨</h1>
-        <input type="text" id="nameInput" placeholder="Type your name here...">
-        <br>
-        <button onclick="checkName()">Submit</button>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="heart-pulse">💖</div>
+        <h1 class="neon-text">Enter the Magic Name</h1>
+        <input type="text" id="nameInput" placeholder="Type the special name...">
+        <button class="glow-button" onclick="checkName()">Open Surprise</button>
     </div>
 
-    <div id="content-container">
-        <div class="cake">
-            <div class="layer base"></div>
-            <div class="layer middle"></div>
-            <div class="layer top"></div>
-            <div class="layer candle"></div>
-            <div id="cake-text">Happy Birthday Shimla! 🎉</div>
+    <!-- Main Celebration Screen -->
+    <div id="celebration-screen" class="screen">
+        <canvas id="particles"></canvas>
+        
+        <!-- Animated Cake -->
+        <div class="cartoon-cake">
+            <div class="cake-text">Happy Birthday Shimla!</div>
+            <div class="top-layer">
+                <div class="frosting"></div>
+                <div class="candles">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
+            </div>
+            <div class="middle-layer"></div>
+            <div class="base-layer"></div>
+            <div class="sprinkles"></div>
         </div>
-        <div id="message">Happy Birthday My Love! 💝</div>
+
+        <!-- Animations Container -->
+        <div class="fireworks"></div>
+        <div class="emoji-storm"></div>
+        
+        <!-- Audio -->
+        <audio id="background-music" loop>
+            <source src="assets/audio/birthday-music.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
-    <script>
-        function checkName() {
-            const name = document.getElementById('nameInput').value.toLowerCase();
-            if(name === 'shimla') {
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('content-container').style.display = 'block';
-                createAnimations();
-            } else {
-                alert('This is not for you! ❌');
-            }
-        }
-
-        function createAnimations() {
-            // Create floating emojis
-            const emojis = ['💖', '🎉', '🎂', '🎈', '🌸', '💋', '🥰'];
-            for(let i = 0; i < 50; i++) {
-                const emoji = document.createElement('div');
-                emoji.className = 'emoji';
-                emoji.style.left = Math.random() * 100 + 'vw';
-                emoji.style.animationDelay = Math.random() * 2 + 's';
-                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                document.body.appendChild(emoji);
-            }
-
-            // Create falling hearts
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.style.left = Math.random() * 100 + 'vw';
-                document.body.appendChild(heart);
-                
-                setTimeout(() => heart.remove(), 3000);
-            }, 300);
-        }
-    </script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
