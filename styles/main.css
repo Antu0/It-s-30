@@ -1,0 +1,99 @@
+:root {
+    --primary-color: #ff69b4;
+    --secondary-color: #ff1493;
+    --background: #1a1a1a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Comic Neue', cursive;
+    background: var(--background);
+    overflow: hidden;
+}
+
+/* Login Screen Styles */
+#login-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: radial-gradient(circle, #330033 0%, #000000 100%);
+    transition: all 0.5s ease;
+}
+
+.heart-pulse {
+    font-size: 4rem;
+    animation: pulse 2s infinite;
+}
+
+.neon-text {
+    color: #fff;
+    text-shadow: 0 0 5px var(--primary-color),
+                 0 0 10px var(--primary-color),
+                 0 0 20px var(--primary-color),
+                 0 0 40px var(--secondary-color),
+                 0 0 80px var(--secondary-color);
+    margin: 20px 0;
+}
+
+.glow-button {
+    background: var(--primary-color);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Cake Styles */
+.cartoon-cake {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    animation: cakeBounce 2s ease infinite;
+}
+
+.cake-layer {
+    position: absolute;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.base-layer {
+    width: 300px;
+    height: 100px;
+    bottom: 50px;
+    left: 50px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    animation: layerFloat 3s ease-in-out infinite;
+}
+
+.middle-layer {
+    width: 250px;
+    height: 90px;
+    bottom: 130px;
+    left: 75px;
+    background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+    animation: layerFloat 3s ease-in-out infinite 0.5s;
+}
+
+.top-layer {
+    width: 200px;
+    height: 80px;
+    bottom: 200px;
+    left: 100px;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    animation: layerFloat 3s ease-in-out infinite 1s;
+}
+
+/* Add all previous animations from earlier answer here */
+/* (Include all @keyframes from previous CSS examples) */
