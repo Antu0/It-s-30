@@ -105,7 +105,7 @@ function createSparkles() {
 
 function playMusic() {
     audio = new Howl({
-        src: ['assets/audio/birthday-song.mp3'],
+        src: ['assets/audio/birthday-music.mp3'],
         volume: 0.5,
         loop: true,
         html5: true
