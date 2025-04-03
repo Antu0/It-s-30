@@ -3,56 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Birthday Surprise</title>
+    <title>Special Surprise 💖</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+        }
+
+        #login-container {
             text-align: center;
-            background-color: #ffe6f2;
-            margin: 50px;
+            z-index: 2;
         }
-        #container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        #message {
+
+        #content-container {
             display: none;
-            margin-top: 20px;
+            position: relative;
+            text-align: center;
         }
-        img {
-            width: 300px;
+
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ff6b6b;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cake {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .layer {
+            background: #fff5f5;
             border-radius: 10px;
+            position: absolute;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .base { width: 200px; height: 60px; bottom: 0; }
+        .middle { width: 160px; height: 50px; bottom: 65px; left: 20px; }
+        .top { width: 120px; height: 40px; bottom: 120px; left: 40px; }
+        .candle { width: 10px; height: 40px; background: #ffd700; bottom: 160px; left: 95px; }
+
+        .emoji {
+            font-size: 30px;
+            position: absolute;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b6b;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        #message {
+            font-size: 24px;
+            color: #ff6b6b;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h2>Enter Your Name</h2>
-        <input type="text" id="name1" placeholder="Enter your name">
+    <div id="login-container">
+        <h1>✨ Enter the Special Name ✨</h1>
+        <input type="text" id="nameInput" placeholder="Type your name here...">
+        <br>
         <button onclick="checkName()">Submit</button>
-        <div id="message">
-            <h2>Happy Birthday, Love! 🎉🎂</h2>
-            <p>You make my world brighter every day! I hope your birthday is as wonderful as you are. ❤️</p>
-            <img src="https://media.tenor.com/7A74FmV0ZC4AAAAC/cake-happy-birthday.gif" alt="Happy Birthday">
+    </div>
+
+    <div id="content-container">
+        <div class="cake">
+            <div class="layer base"></div>
+            <div class="layer middle"></div>
+            <div class="layer top"></div>
+            <div class="layer candle"></div>
+            <div id="cake-text">Happy Birthday Shimla! 🎉</div>
         </div>
+        <div id="message">Happy Birthday My Love! 💝</div>
     </div>
 
     <script>
         function checkName() {
-            let name1 = document.getElementById('name1').value.trim().toLowerCase();
-            if (name1 === 'shimla') {
-                document.getElementById('message').style.display = 'block';
+            const name = document.getElementById('nameInput').value.toLowerCase();
+            if(name === 'shimla') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('content-container').style.display = 'block';
+                createAnimations();
             } else {
-                alert('Oops! Name does not match. Try again!');
+                alert('This is not for you! ❌');
             }
+        }
+
+        function createAnimations() {
+            // Create floating emojis
+            const emojis = ['💖', '🎉', '🎂', '🎈', '🌸', '💋', '🥰'];
+            for(let i = 0; i < 50; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.animationDelay = Math.random() * 2 + 's';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(emoji);
+            }
+
+            // Create falling hearts
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 3000);
+            }, 300);
         }
     </script>
 </body>
