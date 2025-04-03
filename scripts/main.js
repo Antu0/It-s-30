@@ -1,7 +1,5 @@
 const CORRECT_NAME = 'shimla';
 const EMOJIS = ['🎉', '💖', '🎂', '🎁', '🌸', '💋', '🥳'];
-
-// Initialize
 let particles = [];
 let audio;
 
@@ -109,7 +107,8 @@ function playMusic() {
     audio = new Howl({
         src: ['assets/audio/birthday-song.mp3'],
         volume: 0.5,
-        loop: true
+        loop: true,
+        html5: true
     });
     audio.play();
 }
@@ -145,3 +144,8 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+// Initialize
+window.onload = () => {
+    document.getElementById('celebration-screen').style.display = 'none';
+};
